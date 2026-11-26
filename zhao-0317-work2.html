@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="zh-CN" id="top">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>口琴社 · 2026 春季招新</title>
+<style>
+  :root {
+    --ink: #10233b;
+    --navy: #0b2545;
+    --navy2: #13345c;
+    --gold: #d4a44c;
+    --gold2: #f0c876;
+    --paper: #f7f8fa;
+    --line: #e2e6ec;
+    --muted: #5f6b7a;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; color: var(--ink); background: var(--paper);
+    font-family: "Microsoft YaHei", "PingFang SC", system-ui, -apple-system, sans-serif;
+    line-height: 1.85;
+  }
+  a { color: inherit; }
+
+  /* ---------- 顶栏 ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; gap: 22px;
+    padding: 12px 40px;
+    background: rgba(8, 20, 36, .94);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(212, 164, 76, .28);
+  }
+  .music-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 9px 18px; border-radius: 999px; cursor: pointer;
+    color: var(--gold2); background: rgba(212, 164, 76, .10);
+    border: 1px solid rgba(212, 164, 76, .55);
+    font-size: 14px; letter-spacing: .5px;
+    transition: .25s ease;
+    font-family: inherit;
+  }
+  .music-btn:hover { background: rgba(212, 164, 76, .22); transform: translateY(-1px); }
+  .music-btn .ic {
+    display: inline-block; width: 18px; text-align: center;
+    font-size: 19px; line-height: 1;
+  }
+  .music-btn.playing .ic { animation: spin 2.6s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .brand { color: #fff; font-size: 21px; font-weight: 700; letter-spacing: 3px; }
+  .brand span {
+    display: block; font-size: 11px; font-weight: 400; letter-spacing: 3.5px;
+    color: rgba(255, 255, 255, .5); margin-top: 2px;
+  }
+  .topbar .spacer { flex: 1; }
+  .topbar .slogan { color: rgba(255, 255, 255, .55); font-size: 13px; letter-spacing: 2px; }
+
+  /* ---------- 导航 ---------- */
+  .nav {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+    padding: 16px 20px; background: #fff;
+    border-bottom: 1px solid var(--line);
+    position: sticky; top: 66px; z-index: 40;
+  }
+  .nav a {
+    text-decoration: none; padding: 8px 20px; border-radius: 999px;
+    border: 1px solid var(--line); color: var(--navy);
+    font-size: 14.5px; letter-spacing: 1px; transition: .22s ease;
+  }
+  .nav a:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; height: 430px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    background:
+      radial-gradient(760px 460px at 22% 6%, rgba(255, 176, 84, .30) 0%, rgba(255, 176, 84, 0) 62%),
+      radial-gradient(680px 460px at 84% 16%, rgba(92, 204, 255, .22) 0%, rgba(92, 204, 255, 0) 60%),
+      linear-gradient(160deg, #133257 0%, #0b2545 46%, #061321 100%);
+  }
+  .hero .beam {
+    position: absolute; top: -220px; left: 50%; width: 380px; height: 900px;
+    transform: rotate(16deg);
+    background: linear-gradient(180deg, rgba(255, 240, 200, .20), rgba(255, 240, 200, 0) 66%);
+    filter: blur(40px);
+  }
+  .hero .note {
+    position: absolute; color: rgba(255, 232, 190, .50);
+    text-shadow: 0 0 30px rgba(255, 200, 120, .55);
+  }
+  .hero .title {
+    position: relative; text-align: center; color: #fff; z-index: 2;
+  }
+  .hero .title h1 {
+    margin: 0 0 16px; font-size: 58px; letter-spacing: 18px; text-indent: 18px; font-weight: 700;
+    text-shadow: 0 10px 40px rgba(0, 0, 0, .7);
+  }
+  .hero .title p {
+    margin: 0; color: var(--gold2); letter-spacing: 5px; text-indent: 5px; font-size: 15px;
+  }
+
+  /* ---------- 内容区 ---------- */
+  .section {
+    max-width: 1040px; margin: 0 auto; padding: 74px 26px 40px;
+    scroll-margin-top: 132px;
+  }
+  .section h2 {
+    margin: 0 0 8px; font-size: 30px; letter-spacing: 4px; color: var(--navy);
+    position: relative; display: inline-block; padding-bottom: 12px;
+  }
+  .section h2::after {
+    content: ""; position: absolute; left: 0; bottom: 0; width: 56px; height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .section .sub {
+    color: var(--muted); font-size: 13px; letter-spacing: 3px; margin: 0 0 28px;
+  }
+  .section p { margin: 14px 0; text-align: justify; font-size: 16.5px; }
+  .section p.first::first-letter {
+    font-size: 46px; float: left; line-height: .92; padding: 4px 10px 0 0;
+    color: var(--gold); font-weight: 700;
+  }
+
+  /* ---------- 表格 ---------- */
+  .table-wrap { overflow-x: auto; margin: 26px 0 10px; }
+  table.schedule {
+    width: 100%; border-collapse: collapse; background: #fff;
+    border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+    box-shadow: 0 14px 40px rgba(16, 35, 59, .07);
+  }
+  table.schedule th, table.schedule td {
+    border: 1px solid var(--line); padding: 14px 16px; font-size: 15.5px;
+  }
+  table.schedule thead th {
+    background: var(--navy); color: #fff; font-weight: 600; letter-spacing: 2px;
+  }
+  table.schedule tr:first-child td, table.schedule tr:first-child th {
+    background: linear-gradient(135deg, var(--navy), var(--navy2));
+    color: #fff; text-align: center; font-size: 18px; letter-spacing: 3px;
+    font-weight: 700; padding: 18px;
+  }
+  table.schedule tr.center td { text-align: center; }
+  table.schedule tbody tr:nth-child(even) { background: #fbfcfe; }
+  table.schedule tbody tr:hover { background: #f3f7fd; }
+
+  /* ---------- 风采展示 ---------- */
+  .gallery { display: grid; grid-template-columns: 1.15fr .85fr; gap: 26px; align-items: start; }
+  .photo-card {
+    display: block; position: relative; border-radius: 18px; overflow: hidden;
+    box-shadow: 0 20px 50px rgba(11, 37, 69, .18);
+    transition: .3s ease;
+  }
+  .photo-card:hover { transform: translateY(-4px); box-shadow: 0 26px 60px rgba(11, 37, 69, .28); }
+  .photo-card img { display: block; width: 100%; height: auto; }
+  .photo-card .cap {
+    position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 20px 16px;
+    color: #fff; font-size: 14px; letter-spacing: 1px;
+    background: linear-gradient(180deg, transparent, rgba(4, 10, 20, .85));
+  }
+  .photo-card .cap b { color: var(--gold2); }
+  .video-card {
+    background: #fff; border: 1px solid var(--line); border-radius: 18px;
+    padding: 16px; box-shadow: 0 14px 40px rgba(16, 35, 59, .08);
+  }
+  .video-card h3 {
+    margin: 2px 0 12px; font-size: 16px; letter-spacing: 2px; color: var(--navy);
+  }
+  .video-card embed { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; border-radius: 10px; background: #000; }
+  .video-card .hint { color: var(--muted); font-size: 12.5px; margin-top: 10px; line-height: 1.7; }
+  .video-card .hint a { color: var(--navy); }
+
+  /* ---------- 故事 ---------- */
+  .story-box {
+    background: #fff; border: 1px solid var(--line); border-radius: 18px;
+    padding: 34px 38px; box-shadow: 0 16px 46px rgba(16, 35, 59, .07);
+  }
+  .story-box h3 { margin: 0 0 6px; color: var(--navy); font-size: 21px; letter-spacing: 2px; }
+  .story-box .meta { color: var(--muted); font-size: 13px; letter-spacing: 1px; margin-bottom: 14px; }
+  .story-box p { font-size: 16px; }
+  .story-box blockquote {
+    margin: 18px 0; padding: 14px 18px; border-left: 4px solid var(--gold);
+    background: #fdf8ee; color: #5a4a2c; border-radius: 0 10px 10px 0; font-size: 15.5px;
+  }
+
+  /* ---------- 表单 ---------- */
+  .form-card {
+    background: #fff; border: 1px solid var(--line); border-radius: 18px;
+    padding: 30px 34px; box-shadow: 0 16px 46px rgba(16, 35, 59, .07);
+  }
+  .form-card table { width: 100%; border-collapse: collapse; }
+  .form-card th, .form-card td { padding: 12px 10px; border-bottom: 1px dashed var(--line); font-size: 15.5px; vertical-align: middle; }
+  .form-card th {
+    width: 168px; text-align: right; font-weight: 600; color: var(--navy);
+    letter-spacing: 1px; padding-right: 18px; white-space: nowrap;
+  }
+  .form-card input[type="text"], .form-card select, .form-card textarea {
+    font-family: inherit; font-size: 15px; color: var(--ink);
+    padding: 8px 12px; border: 1px solid #cdd5df; border-radius: 9px;
+    background: #fcfdff; outline: none; transition: .2s; min-width: 180px;
+  }
+  .form-card input[type="text"]:focus, .form-card select:focus, .form-card textarea:focus {
+    border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212, 164, 76, .16); background: #fff;
+  }
+  .form-card textarea { width: 100%; min-height: 108px; resize: vertical; line-height: 1.8; }
+  .form-card label { margin-right: 18px; font-size: 15px; cursor: pointer; }
+  .form-card input[type="radio"], .form-card input[type="checkbox"] { accent-color: var(--gold); margin-right: 5px; }
+  .form-card .date-group input { min-width: 76px; width: 78px; text-align: center; }
+  .form-card .ops { text-align: center; padding-top: 22px; }
+  .btn {
+    font-family: inherit; cursor: pointer; border: 0; border-radius: 999px;
+    padding: 12px 42px; font-size: 16px; letter-spacing: 4px; transition: .25s ease;
+  }
+  .btn.submit { background: linear-gradient(135deg, var(--gold2), var(--gold)); color: #23180a; font-weight: 700; }
+  .btn.submit:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(212, 164, 76, .4); }
+  .btn.reset { background: #eef1f5; color: var(--muted); margin-left: 14px; }
+  .btn.reset:hover { background: #e2e7ee; }
+
+  /* ---------- 返回顶部 ---------- */
+  .backtop {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin: 30px 0 0; padding: 9px 22px; border-radius: 999px;
+    text-decoration: none; font-size: 14px; letter-spacing: 2px;
+    color: var(--navy); border: 1px solid var(--line); background: #fff;
+    transition: .22s ease;
+  }
+  .backtop:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .backtop .arrow { color: var(--gold); }
+
+  /* ---------- 页脚 ---------- */
+  footer {
+    margin-top: 40px; padding: 40px 26px 30px; text-align: center;
+    background: var(--navy); color: rgba(255, 255, 255, .62); font-size: 13.5px; letter-spacing: 1px;
+  }
+  footer b { color: var(--gold2); font-weight: 600; }
+  footer .line { width: 56px; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto 18px; }
+
+  @media (max-width: 860px) {
+    .gallery { grid-template-columns: 1fr; }
+    .hero .title h1 { font-size: 34px; letter-spacing: 5px; }
+    .topbar { padding: 10px 16px; gap: 12px; }
+    .topbar .slogan { display: none; }
+    .nav { top: 60px; }
+    .form-card { padding: 20px 16px; }
+    .form-card th { width: 110px; font-size: 14px; padding-right: 10px; }
+    .section { padding: 54px 16px 30px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= 顶栏：左上角播放背景音乐 ================= -->
+<header class="topbar">
+  <button id="musicBtn" class="music-btn" type="button" aria-label="播放背景音乐">
+    <span class="ic">♪</span><span class="txt">播放背景音乐</span>
+  </button>
+  <div class="brand">A口琴社<span>HARMONICA CLUB</span></div>
+  <div class="spacer"></div>
+  <div class="slogan">2026 春季招新 · 以琴会友</div>
+</header>
+<audio id="bgm" src="bgm.wav" loop preload="auto"></audio>
+
+<!-- ================= 导航（五对指向本页的锚点链接） ================= -->
+<nav class="nav">
+  <a href="#intro">社团简介</a>
+  <a href="#schedule">活动安排</a>
+  <a href="#gallery">风采展示</a>
+  <a href="#stories">社员故事</a>
+  <a href="#signup">在线报名</a>
+</nav>
+
+<!-- ================= Hero ================= -->
+<div class="hero">
+  <div class="beam"></div>
+  <span class="note" style="left:12%; top:22%; font-size:40px; transform:rotate(-12deg)">♪</span>
+  <span class="note" style="left:22%; top:58%; font-size:24px; transform:rotate(8deg)">♬</span>
+  <span class="note" style="right:16%; top:20%; font-size:30px; transform:rotate(10deg)">♫</span>
+  <span class="note" style="right:24%; top:62%; font-size:38px; transform:rotate(-8deg)">♪</span>
+  <span class="note" style="left:46%; top:14%; font-size:20px; transform:rotate(14deg)">♩</span>
+  <div class="title">
+    <h1>口琴社</h1>
+    <p>一把小口琴，也能吹出整个舞台的光</p>
+  </div>
+</div>
+
+<!-- ================= 1. 社团简介 ================= -->
+<section id="intro" class="section">
+  <h2>社团简介</h2>
+  <p class="sub">ABOUT US · 关于我们</p>
+
+  <p class="first">口琴社成立于一九九八年秋天，是学校里历史最悠久的音乐类社团之一。二十七年来，我们只做一件事：让每一个拿起口琴的人，都能在最短的时间里吹出属于自己的旋律。口琴是世界上最便携的乐器，它只有手掌大小，却能装下一整个乐队的和声、一整个夜晚的情绪，以及一所大学里最自由的那部分青春。</p>
+
+  <p>很多人第一次听说口琴社，都会问同一个问题：口琴这么简单，能玩出什么花样？答案是——比你想象的多得多。口琴家族里有十孔布鲁斯口琴、复音口琴、半音阶口琴，还有能同时吹出和弦的重音口琴与低音口琴。十孔口琴可以吹出地道的蓝调与摇滚，半音阶口琴能完整演奏古典与爵士，而当我们把五六支口琴放进一个乐队，它就变成了一个具体而微的管弦乐团。社团目前设有演奏组、教学组、编曲组与新媒体组四个方向，无论你想站在聚光灯下独奏，还是想坐在排练室的角落里改编一首曲子，都能在这里找到自己的位置。</p>
+
+  <p>社团的日常由三部分组成：每周一次的集体排练、每周两次的分组教学，以及每月一场的“琴房夜话”分享会。集体排练在艺术楼三楼的排练厅进行，我们从最基础的气息控制讲起，讲到压音、超吹、舌堵伴奏，再到如何把一个完整的乐句吹得有呼吸感。分组教学则按基础分成入门班、进阶班和舞台班，入门班从零开始，第一节课就能吹出《小星星》；进阶班开始接触蓝调音阶和即兴；舞台班则直接为校内外的演出做准备。至于“琴房夜话”，那是社团最柔软的部分——有人带着自己写的曲子来，有人只是来听，有人抱着琴坐在窗边吹到熄灯。</p>
+
+  <p>二十多年里，口琴社拿过省大学生艺术展演器乐组的一等奖，也在校园十佳社团的评选中连续多年上榜。但比起奖状，我们更在意另一些东西：是迎新晚会上，台下几百个人跟着我们的旋律一起打拍子的那个瞬间；是毕业季的草坪音乐会上，已经工作的老社员背着琴从城市另一头赶回来，和我们合奏一首《送别》；是深冬的排练厅里，暖气不太足，大家挤在一起对着谱子一遍遍磨一个和声，磨到手指发僵也不肯走。音乐从来不是一个人的事，口琴社也不是一个只收“会吹琴的人”的地方——我们收的是愿意为一个音符多试十遍的人。</p>
+
+  <p>如果你从来没有碰过口琴，没关系。社团会为每一位新成员准备一支入门复音口琴，前四周的教学完全免费，你只需要带着耳朵和好奇心过来。如果你已经会吹一点，那我们更欢迎你来，因为一个社团真正的厚度，从来不是靠某几个高手撑起来的，而是靠一群水平不同、却愿意互相听、互相配合的人撑起来的。我们相信，一支口琴最动人的时刻，不是它独奏的时候，而是它和另一支口琴、和吉他、和鼓、和整个房间的呼吸对上的那一刻。</p>
+
+  <p>这个春天，口琴社在等新的声音。你可以是那个第一次把嘴唇贴上琴格、紧张得不敢用力的人，也可以是那个在宿舍阳台上吹了三年、终于想找同伴的人。不论你带着什么来，我们都想听你吹一段。招新不设门槛，不考试，不面试，只要你愿意来，排练厅第三排靠窗的位置，永远给你留着。</p>
+
+  <a class="backtop" href="#top"><span class="arrow">↑</span> 返回顶部</a>
+</section>
+
+<!-- ================= 2. 活动安排 ================= -->
+<section id="schedule" class="section">
+  <h2>活动安排</h2>
+  <p class="sub">SCHEDULE · 2026 年春季学期</p>
+
+  <p>本学期活动从第三周正式开始，贯穿整个春季学期。除常规排练与教学外，我们还安排了两次对外演出、一次校际交流和一場期末汇演。新成员见面会与口琴基础教学公开课安排在同一间教室（艺术楼 302），方便大家一次认路、两次到场。</p>
+
+  <div class="table-wrap">
+    <table class="schedule">
+      <!-- 第一行：跨 4 列 -->
+      <tr>
+        <td colspan="4">口琴社 2026 年春季学期活动安排表</td>
+      </tr>
+      <!-- 第二行：内容居中 -->
+      <tr class="center">
+        <td>周次</td>
+        <td>活动内容</td>
+        <td>时间</td>
+        <td>地点</td>
+      </tr>
+      <tr>
+        <td>第 3 周</td>
+        <td>新成员见面会 · 社团介绍与破冰</td>
+        <td>周三 19:00 — 21:00</td>
+        <td>艺术楼 302</td>
+      </tr>
+      <tr>
+        <td>第 4 周</td>
+        <td>口琴基础教学公开课（第一节）</td>
+        <td>周三 19:00 — 21:00</td>
+        <td>艺术楼 302</td>
+      </tr>
+      <tr>
+        <td>第 5 — 8 周</td>
+        <td>分组教学：入门班 / 进阶班 / 舞台班</td>
+        <td>每周三、周六 19:00</td>
+        <td>艺术楼 305、306</td>
+      </tr>
+      <tr>
+        <td>第 9 周</td>
+        <td>“琴房夜话” 分享会 · 蓝调专场</td>
+        <td>周五 19:30 — 21:30</td>
+        <td>大学生活动中心 报告厅</td>
+      </tr>
+      <tr>
+        <td>第 11 周</td>
+        <td>春季草坪音乐会（对外演出）</td>
+        <td>周六 16:00 — 18:00</td>
+        <td>中心草坪</td>
+      </tr>
+      <tr>
+        <td>第 13 周</td>
+        <td>校际口琴交流日 · 三校联合排练</td>
+        <td>周日 14:00 — 17:00</td>
+        <td>艺术楼 排练厅</td>
+      </tr>
+      <tr>
+        <td>第 16 周</td>
+        <td>期末汇演 · “一口气吹完这个春天”</td>
+        <td>周五 19:00 — 21:00</td>
+        <td>大学生活动中心 剧场</td>
+      </tr>
+    </table>
+  </div>
+
+  <p>以上安排如遇学校大型活动或考试周，会在社团群内提前一周通知调整。所有教学与排练均对全体社员开放，旁听不设限制；演出类活动需要提前报名并参加至少两次合排。</p>
+
+  <a class="backtop" href="#top"><span class="arrow">↑</span> 返回顶部</a>
+</section>
+
+<!-- ================= 3. 风采展示 ================= -->
+<section id="gallery" class="section">
+  <h2>风采展示</h2>
+  <p class="sub">GALLERY · 排练与舞台</p>
+
+  <div class="gallery">
+    <!-- 点击图片跳转到 club_intro.html -->
+    <a class="photo-card" href="club_intro.html" title="点击查看社团活动介绍">
+      <img src="club_photo.jpg" alt="口琴社夜晚排练">
+      <div class="cap"><b>夜晚排练</b> · 艺术楼三楼的灯，总是最后熄</div>
+    </a>
+
+    <div class="video-card">
+      <h3>社团宣传短片</h3>
+      <!-- 用 embed 标签导入 mp4 视频（参考 ex3_25） -->
+      <embed src="club.mp4" type="video/mp4" width="100%" height="240" autostart="false" loop="false" />
+      <p class="hint">若浏览器未直接渲染 embed 播放器，可<a href="club.mp4" target="_blank" rel="noopener">点此下载/播放视频</a>。</p>
+    </div>
+  </div>
+
+  <p>这张照片拍于三月的一个周三晚上。排练厅的灯只开了一半，暖黄的光从头顶斜下来，落在琴格上，金属的盖板被照得发亮。那天我们在排一首改编的《卡农》，吹到第三遍的时候，后排的鼓手突然加了一个很轻的刷镲，整间屋子一下子“活”了过来。照片里的三个人，一个是刚入社两个月的大一学妹，一个是已经吹了六年的老社长，还有一个是被拉来客串的吉他手——他们其实不太熟，但那一刻，呼吸是对上的。</p>
+
+  <a class="backtop" href="#top"><span class="arrow">↑</span> 返回顶部</a>
+</section>
+
+<!-- ================= 4. 社员故事 ================= -->
+<section id="stories" class="section">
+  <h2>社员故事</h2>
+  <p class="sub">STORIES · 节选</p>
+
+  <div class="story-box">
+    <h3>第一支琴，吹到第七天</h3>
+    <p class="meta">作者：林知夏 · 2024 级 · 社团第 26 届成员</p>
+
+    <p>我加入口琴社，其实是一个很偶然的决定。大一开学那会儿，社团招新的帐篷在主干道两边排了一长溜，吉他社在弹唱，街舞社在放音乐，话剧社的学姐穿着戏服发传单。口琴社的摊位特别冷清，就一张桌子，两个人，桌上摆着一排亮晶晶的琴。我路过的时候，其中一个学长正在吹一首很老的歌，声音不大，但在嘈杂的招新街上，它偏偏就钻进了我的耳朵。</p>
+
+    <p>我停下来听。他吹完，抬头看我，说：“要试试吗？”我说我不会。他说：“没关系，这个很简单。”然后把一支复音口琴塞到我手里，教我把嘴唇贴上去，先别吹，先感受一下琴格的形状。我照做了，吹出了第一个音，很轻，有点发颤，但在那一瞬间我忽然觉得，好像有什么东西被打开了。</p>
+
+    <p>入社之后的前两周，我每天都在“吹不响”和“吹跑调”之间反复横跳。口琴看起来简单，实际上气息、口型、舌头的位置，每一样都要重新学。我在宿舍的阳台上练，室友从最开始的忍，到后来的习惯，再到有一天她跟我说：“你昨天吹的那段，是不是《送别》？”我才发现，原来自己已经能让人听出来了。</p>
+
+    <p>第一次集体排练是在艺术楼 302。那天来了二十多个人，从大一到研究生都有。社长让我们每人吹一句，吹什么都行。轮到我的时候，我紧张得嘴唇都在抖，吹到一半还断了气。我以为会被笑，结果大家很自然地鼓了掌，坐在我旁边的学姐小声说：“音准不错，就是有点急，下次慢一点。”</p>
+
+    <blockquote>后来我才明白，口琴社真正教给我的，不是怎么把一首曲子弹对，而是怎么在一个房间里，和一群节奏不一样的人，找到同一个呼吸。</blockquote>
+
+    <p>现在我是社团教学组的一员，每周三晚上带着新一批入门班的人吹《小星星》。他们中的很多人，第一次吹的时候，和我当年一样手忙脚乱。我会跟他们说同一句话：“没关系，这个很简单。先别吹，先感受一下琴格。”然后看着他们低下头，认认真真地把嘴唇贴上去。</p>
+
+    <p>如果你问我，一支口琴能带来什么？我会说，它带来了一间亮着灯的排练室，一群愿意等你把跑调的音吹完的人，以及一个在深夜里忽然想起来、会忍不住笑一下的周三。这些听起来都不算什么大事，但大学四年里，能把这样的小事攒起来的社团，其实不多。</p>
+
+    <p>所以，如果你也路过我们的摊位，如果你也停下来听了那么一小会儿——别犹豫，来试试吧。我们有琴，有谱，有一整面墙的光，还有第三排靠窗的位置，一直空着。</p>
+  </div>
+
+  <a class="backtop" href="#top"><span class="arrow">↑</span> 返回顶部</a>
+</section>
+
+<!-- ================= 5. 在线报名 ================= -->
+<section id="signup" class="section">
+  <h2>在线报名</h2>
+  <p class="sub">JOIN US · 十个空格，一次加入</p>
+
+  <p>填写下面的报名表，我们会在三个工作日内通过手机或邮箱联系你。所有信息仅用于社团招新，不会对外公开。</p>
+
+  <div class="form-card">
+    <form action="#" method="post" onsubmit="alert('报名信息已提交，我们很快联系你！'); return false;">
+      <table>
+        <tr>
+          <th>姓名</th>
+          <td><input type="text" name="name" placeholder="请输入你的姓名"></td>
+        </tr>
+        <tr>
+          <th>性别</th>
+          <td>
+            <label><input type="radio" name="gender" value="male" checked> 男</label>
+            <label><input type="radio" name="gender" value="female"> 女</label>
+          </td>
+        </tr>
+        <tr>
+          <th>出生日期</th>
+          <td class="date-group">
+            <input type="text" name="birth_year" placeholder="年" maxlength="4">
+            <input type="text" name="birth_month" placeholder="月" maxlength="2">
+            <input type="text" name="birth_day" placeholder="日" maxlength="2">
+          </td>
+        </tr>
+        <tr>
+          <th>手机 / 邮箱</th>
+          <td>
+            <input type="text" name="phone" placeholder="手机号" style="width:190px">
+            <input type="text" name="email" placeholder="邮箱" style="width:230px; margin-left:10px">
+          </td>
+        </tr>
+        <tr>
+          <th>是否有口琴基础</th>
+          <td>
+            <label><input type="radio" name="skill" value="yes"> 有，能完整吹奏曲目</label>
+            <label><input type="radio" name="skill" value="little"> 会一点点</label>
+            <label><input type="radio" name="skill" value="no" checked> 完全没有</label>
+          </td>
+        </tr>
+        <tr>
+          <th>兴趣方向</th>
+          <td>
+            <label><input type="checkbox" name="interest" value="blues"> 蓝调 / 摇滚</label>
+            <label><input type="checkbox" name="interest" value="pop"> 流行改编</label>
+            <label><input type="checkbox" name="interest" value="classical"> 古典 / 室内乐</label>
+            <label><input type="checkbox" name="interest" value="compose"> 编曲创作</label>
+            <label><input type="checkbox" name="interest" value="stage"> 舞台演出</label>
+          </td>
+        </tr>
+        <tr>
+          <th>年级</th>
+          <td>
+            <select name="grade">
+              <option value="1">大一</option>
+              <option value="2">大二</option>
+              <option value="3">大三</option>
+              <option value="4">大四</option>
+              <option value="5">研究生</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>自我介绍</th>
+          <td>
+            <textarea name="intro" placeholder="请简单介绍自己、以及加入口琴社的理由……"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <th>是否服从活动安排</th>
+          <td>
+            <label><input type="radio" name="follow" value="yes" checked> 是</label>
+            <label><input type="radio" name="follow" value="no"> 否</label>
+          </td>
+        </tr>
+        <tr>
+          <th></th>
+          <td class="ops">
+            <input type="submit" class="btn submit" value="提交报名">
+            <input type="reset" class="btn reset" value="重置">
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+
+  <a class="backtop" href="#top"><span class="arrow">↑</span> 返回顶部</a>
+</section>
+
+<footer>
+  <div class="line"></div>
+  <p><b>A口琴社</b> · Harmonica Club · 2026 春季招新</p>
+  <p>排练地点：艺术楼 302 / 305 / 306 &nbsp;|&nbsp; 联系邮箱：harmonica@example.edu</p>
+</footer>
+
+<script>
+  // 左上角按钮：点击播放 / 暂停背景音乐
+  (function () {
+    var btn = document.getElementById('musicBtn');
+    var bgm = document.getElementById('bgm');
+    var icon = btn.querySelector('.ic');
+    var txt = btn.querySelector('.txt');
+
+    function render() {
+      if (bgm.paused) {
+        icon.textContent = '♪';
+        txt.textContent = '播放背景音乐';
+        btn.classList.remove('playing');
+      } else {
+        icon.textContent = '❚❚';
+        txt.textContent = '正在播放';
+        btn.classList.add('playing');
+      }
+    }
+
+    btn.addEventListener('click', function () {
+      if (bgm.paused) {
+        bgm.play().catch(function () {
+          txt.textContent = '点击后播放';
+        });
+      } else {
+        bgm.pause();
+      }
+      render();
+    });
+
+    bgm.addEventListener('play', render);
+    bgm.addEventListener('pause', render);
+    render();
+  })();
+</script>
+</body>
+</html>

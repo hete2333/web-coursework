@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>外语读本交流夜 · Foreign Book Meetup</title>
+<style>
+
+    /* ============================================================
+       页面整体：暖草绿渐变背景 + inline-block 居中布局
+       ============================================================ */
+    body {
+        margin: 0;
+        font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
+        background: linear-gradient(165deg, #f7fcf4, #e6f4df 55%, #d6ecd0);
+        background-repeat: no-repeat;
+        color: #22392a;
+        text-align: center;
+        line-height: 1.9;
+    }
+
+    /* ---------- 作业指定 .page 样式（仅允许修改 background-color） ---------- */
+    .page {
+        display: inline-block;
+        background-color: #E6F8E0;
+        box-shadow: 0 0 30px rgba(80, 58, 35, 0.25);
+        text-align: left;
+        max-width: 720px;
+    }
+
+    /* ---------- 并集选择器：统一六级标题 ---------- */
+    h1, h2, h3, h4, h5, h6 {
+        color: #1d4d33;
+        letter-spacing: 1px;
+        font-weight: 700;
+    }
+
+    /* ---------- ID 选择器 p#intro：只匹配 p 标签，是"重要提示" ---------- */
+    p#intro {
+        font-size: 130%;
+        font-weight: bold;
+        color: #b8482f;
+        line-height: 1.75;
+    }
+    /* 重要提示段本身已放大，首字不叠加下沉效果 */
+    p#intro::first-letter {
+        font-size: 120%;
+        color: #b8482f;
+    }
+
+    /* ---------- 后代选择器：仅当 div 中的 table 里出现超链接时才生效 ---------- */
+    div table a {
+        font-weight: bold;
+        font-size: 112%;
+        color: #1f6b45;
+        text-decoration: underline dotted;
+    }
+
+    /* ---------- 链接伪类：四种状态 ---------- */
+    a:link {
+        color: #2f7a4d;
+        text-decoration: none;
+    }
+    a:visited {
+        color: #6d7a4e;
+        text-decoration: none;
+    }
+    a:hover {
+        color: #c0562f;
+        text-decoration: underline;
+    }
+    a:active {
+        color: #2f3fa8;
+        text-decoration: underline;
+    }
+
+    /* ---------- 带类名的链接：红色 & 蓝色 ---------- */
+    a.red:link {
+        color: #b8482f;
+    }
+    a.red:visited {
+        color: #8d5a4b;
+    }
+    a.red:hover {
+        color: #e0663f;
+    }
+    a.red:active {
+        color: #7b2f8d;
+    }
+
+    a.blue:link {
+        color: #3a6ea5;
+    }
+    a.blue:visited {
+        color: #5a6f8d;
+    }
+    a.blue:hover {
+        color: #2b8fd8;
+    }
+    a.blue:active {
+        color: #b8482f;
+    }
+
+    /* ---------- 伪元素：段落首字放大，营造书页排版感 ---------- */
+    p::first-letter {
+        font-size: 180%;
+        color: #1f6b45;
+        font-weight: bold;
+    }
+
+    /* ---------- 伪元素：div 的第一行高亮（底部公告区最明显） ---------- */
+    div::first-line {
+        color: #24583a;
+        font-weight: bold;
+    }
+
+    /* ============================================================
+       以下是版式细节类，不影响作业要求的六个必备选择器
+       ============================================================ */
+
+    /* 顶部标题区 */
+    .hero {
+        padding: 42px 28px 30px;
+        text-align: center;
+        background: linear-gradient(180deg, #d8f0cd, #E6F8E0);
+    }
+    .hero h1 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", "Songti SC", "SimSun", serif;
+        font-size: 40px;
+        letter-spacing: 3px;
+        color: #17452c;
+    }
+    .hero .sub {
+        margin: 10px 0 0;
+        font-size: 15px;
+        letter-spacing: 4px;
+        color: #4a7c5c;
+        text-transform: uppercase;
+    }
+    .hero .sub::first-letter {
+        font-size: 100%;
+        color: #4a7c5c;
+    }
+    .hero .tag::first-letter {
+        font-size: 100%;
+        color: #5d8a6e;
+        font-weight: normal;
+    }
+    .hero .tag {
+        margin: 16px 0 0;
+        font-size: 13px;
+        letter-spacing: 2px;
+        color: #5d8a6e;
+    }
+
+    /* 通用内容区 */
+    .inner {
+        padding: 0 30px;
+    }
+
+    /* 分隔线：用渐变模拟，不写 border */
+    .divider {
+        height: 1px;
+        margin: 0;
+        background: linear-gradient(to right, rgba(31,107,69,0), rgba(31,107,69,.55), rgba(31,107,69,0));
+    }
+
+    /* 区域小标题 */
+    .section-title {
+        margin: 26px 0 14px;
+        text-align: center;
+        font-size: 21px;
+        letter-spacing: 2px;
+    }
+    .section-title:first-line {
+        color: #17452c;
+    }
+
+    /* 活动介绍正文 */
+    .intro-text {
+        line-height: 2.0;
+        letter-spacing: .3px;
+        color: #2b4435;
+    }
+    .quote {
+        margin: 18px 0;
+        padding: 0;
+        text-align: center;
+        font-family: Georgia, "Times New Roman", serif;
+        font-style: italic;
+        font-size: 17px;
+        line-height: 1.85;
+        color: #2f6b45;
+    }
+
+    /* 表格：斑马纹 + 悬停高亮 */
+    table {
+        width: 100%;
+        background-color: #f2fbee;
+        font-size: 90%;
+        border-collapse: collapse;
+        margin: 0 0 6px;
+    }
+    th {
+        background-color: #c8e6bb;
+        color: #17452c;
+        font-weight: bold;
+        text-align: left;
+        line-height: 2.3;
+        letter-spacing: .5px;
+    }
+    td {
+        line-height: 2.1;
+        color: #2b4435;
+    }
+    th, td {
+        padding: 0 12px;
+    }
+    table tr:nth-child(even) {
+        background-color: #e6f6de;
+    }
+    table tr:hover {
+        background-color: #d6efc9;
+    }
+
+    /* 链接区 */
+    .links {
+        padding: 22px 30px;
+        text-align: center;
+        line-height: 2.6;
+    }
+    .links p {
+        margin: 0;
+    }
+    .links a {
+        letter-spacing: 1px;
+        font-weight: bold;
+    }
+    /* 链接区不使用首字下沉，保持两条链接视觉一致 */
+    .links p::first-letter {
+        font-size: 100%;
+        font-weight: normal;
+        color: inherit;
+    }
+
+    /* 底部公告区（第一行会被 div::first-line 高亮） */
+    .notice {
+        padding: 26px 30px 34px;
+        background: #dcf2d3;
+        font-size: 92%;
+        line-height: 2.0;
+        color: #33513f;
+    }
+
+    /* 页面尾部装饰条 */
+    .foot-strip {
+        height: 6px;
+        background: linear-gradient(to right, #a8d89a, #6bbf8a, #a8d89a);
+    }
+
+</style>
+</head>
+<body>
+
+<div class="page">
+
+    <!-- ============ ① 顶部标题区 ============ -->
+    <div class="hero">
+        <h1>外语读本交流夜</h1>
+        <p class="sub">Foreign Book Meetup</p>
+        <p class="tag">图书馆三层 · 旧阅览室 · 2026 秋季第五期</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ============ ② 活动介绍区 ============ -->
+    <div class="inner">
+
+        <h2 id="intro" class="section-title">本周主题：用另一种语言，读同一个世界</h2>
+
+        <p class="intro-text">
+            周五的夜晚，图书馆三层那间常年安静的旧阅览室会被重新布置成一间“世界书房”——木桌上摊开英文、日文、法文与西班牙文的读本，窗边垂着几串手写的小旗，空气里有纸页和热可可混在一起的味道。我们想做的不是一场学术讲座，而是一个允许你读得很慢、问得很笨拙的夜晚。
+        </p>
+
+        <p class="intro-text">
+            每个人带一本自己正在读的外语书来就好。你可以只念三行，然后告诉大家这三行让你想起了什么；也可以干脆把书合上，讲讲你当初为什么在书架前停下来。这里的规则只有一条：不许因为“看得懂”而骄傲，也不许因为“看不懂”而道歉。
+        </p>
+
+        <p class="quote">
+            “Reading in a foreign language is like borrowing someone else's eyes for a single evening — the same moon hangs there, only the word for it has changed.”
+        </p>
+
+        <p id="intro">
+            本次交流席位仅 24 个，报名提交后请在 48 小时内回复确认短信，逾期名额将顺延给候补同学。
+        </p>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ============ ③ 活动报名信息表格区 ============ -->
+    <div class="inner">
+        <h3 class="section-title">活动报名名单</h3>
+
+        <table>
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>联系方式</th>
+                <th>语言等级</th>
+                <th>报名状态</th>
+            </tr>
+            <tr>
+                <td>01</td>
+                <td><a href="#intro">Sofia Martinez</a></td>
+                <td>138****0001</td>
+                <td>托福必读</td>
+                <td>已确认席位</td>
+            </tr>
+            <tr>
+                <td>02</td>
+                <td>林知夏</td>
+                <td>139****0002</td>
+                <td>雅思必读</td>
+                <td>待确认</td>
+            </tr>
+            <tr>
+                <td>03</td>
+                <td><a href="#intro">Oliver Brown</a></td>
+                <td>137****0003</td>
+                <td>GRE 必读</td>
+                <td>候补名单</td>
+            </tr>
+            <tr>
+                <td>04</td>
+                <td>陈屿</td>
+                <td>136****0004</td>
+                <td>四六级冲刺</td>
+                <td>已确认席位</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ============ ④ 页面链接区 ============ -->
+    <div class="links">
+        <p>
+            <a class="red" href="zhao-0317-work2.html">查看往期活动照片</a>
+            <br>
+            <a class="blue" href="zhao-0317-work3.html#intro">在线咨询活动详情</a>
+        </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ============ ⑤ 底部公告区 ============ -->
+    <div class="notice">
+        活动地点：图书馆三层旧阅览室（东侧楼梯上行，右手第二间，门口挂着四国语言的小旗）。<br>
+        活动时间：10 月 30 日 周五 19:00 - 21:30，18:40 开始入场，请预留领取双语场刊的时间。<br>
+        温馨提醒：现场提供中英双语场刊与茶点；若你的读本语种比较冷门，欢迎提前在咨询区留言，我们会为你留一盏台灯。
+    </div>
+
+    <div class="foot-strip"></div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>口琴社 · 活动介绍</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh;
+    font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+    color: #10233b;
+    background:
+      radial-gradient(900px 520px at 80% -10%, #1e3a5f 0%, #0b2545 46%, #071624 100%) fixed;
+    display: flex; align-items: center; justify-content: center;
+    padding: 46px 20px;
+  }
+  .card {
+    width: min(820px, 100%);
+    background: #fbfcfe;
+    border-radius: 22px;
+    box-shadow: 0 40px 90px rgba(3, 12, 24, .55);
+    overflow: hidden;
+  }
+  .card .head {
+    padding: 38px 42px 30px;
+    background: linear-gradient(135deg, #0b2545, #17406e);
+    color: #fff; position: relative; overflow: hidden;
+  }
+  .card .head::after {
+    content: "♪";
+    position: absolute; right: 26px; top: -28px;
+    font-size: 150px; color: rgba(212, 164, 76, .18); line-height: 1;
+  }
+  .card .head .kicker {
+    font-size: 12px; letter-spacing: 4px; color: #f0c876; margin-bottom: 10px;
+  }
+  .card .head h1 {
+    margin: 0 0 8px; font-size: 34px; letter-spacing: 5px; font-weight: 700;
+  }
+  .card .head p { margin: 0; color: rgba(255, 255, 255, .62); font-size: 14px; letter-spacing: 2px; }
+
+  .body { padding: 36px 42px 40px; }
+  .body h2 {
+    margin: 0 0 14px; font-size: 19px; letter-spacing: 2px; color: #0b2545;
+    padding-left: 12px; border-left: 4px solid #d4a44c;
+  }
+  .body p { margin: 10px 0 18px; font-size: 15.5px; line-height: 1.9; text-align: justify; color: #33465c; }
+  .list { margin: 0 0 22px; padding: 0; list-style: none; }
+  .list li {
+    padding: 12px 16px; margin-bottom: 10px; border-radius: 12px;
+    background: #f3f6fa; border: 1px solid #e6ebf2;
+    font-size: 15px; display: flex; gap: 12px; align-items: baseline;
+  }
+  .list li b { color: #0b2545; letter-spacing: 1px; white-space: nowrap; }
+  .list li span { color: #5f6b7a; font-size: 14px; }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    text-decoration: none; font-size: 15px; letter-spacing: 2px;
+    padding: 12px 30px; border-radius: 999px; transition: .25s ease;
+  }
+  .btn.primary {
+    background: linear-gradient(135deg, #f0c876, #d4a44c); color: #23180a; font-weight: 700;
+  }
+  .btn.primary:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(212, 164, 76, .45); }
+  .btn.ghost { border: 1px solid #d9e0e8; color: #0b2545; background: #fff; }
+  .btn.ghost:hover { background: #0b2545; color: #fff; border-color: #0b2545; }
+
+  .foot { margin-top: 30px; padding-top: 18px; border-top: 1px dashed #e2e6ec; color: #8d99a8; font-size: 12.5px; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="head">
+      <div class="kicker">HARMONICA CLUB · ACTIVITIES</div>
+      <h1>社团活动介绍</h1>
+      <p>口琴社 · 2026 春季学期</p>
+    </div>
+
+    <div class="body">
+      <h2>我们平时都在做什么</h2>
+      <p>口琴社的活动围绕“排练、教学、分享、演出”四条线展开。每周三晚上的集体排练是主线，所有成员一起磨一首曲子；每周六的分组教学按基础分班，入门班从气息和口型开始，舞台班直接为演出做准备；每月的“琴房夜话”是一场不设主题的分享会，可以带自己的曲子、可以只是来听；每学期两次的对外演出，则是我们把排练厅里的声音搬上舞台的时刻。</p>
+
+      <ul class="list">
+        <li><b>集体排练</b><span>每周三 19:00 — 21:00 · 艺术楼 302</span></li>
+        <li><b>分组教学</b><span>每周六 19:00 — 20:30 · 艺术楼 305 / 306</span></li>
+        <li><b>琴房夜话</b><span>每月最后一个周五 · 大学生活动中心</span></li>
+        <li><b>草坪音乐会</b><span>第 11 周 周六 16:00 · 中心草坪</span></li>
+        <li><b>期末汇演</b><span>第 16 周 周五 19:00 · 活动中心剧场</span></li>
+      </ul>
+
+      <h2>加入我们，你需要准备什么</h2>
+      <p>不需要任何基础，不需要自带乐器。社团会为每位新成员准备一支入门复音口琴，前四周教学免费。你只需要在周三晚上空出两个小时，带着耳朵来。如果你想更快上手，可以在手机上下载一个节拍器和一个调音器——这两样东西，会陪你走过很长的路。</p>
+
+      <div class="actions">
+        <a class="btn primary" href="zhao-0317-work2.html">← 返回口琴社招新主页</a>
+        <a class="btn ghost" href="zhao-0317-work2.html#signup">直接去报名</a>
+      </div>
+
+      <div class="foot">A口琴社 · Harmonica Club · 以琴会友，以声相认</div>
+    </div>
+  </div>
+</body>
+</html>
